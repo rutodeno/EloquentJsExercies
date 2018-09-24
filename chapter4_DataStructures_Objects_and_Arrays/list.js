@@ -28,6 +28,16 @@ function nth (list, number) {
   return listArray[number];
 }
 
+function nth(list, number) {
+	if(!list) {
+      return undefined;
+    } else if ( number === 0) {
+    	return list.value;
+    } else {
+		return nth(list.rest, number - 1);
+    }
+}
+
 console.log(arrayToList([10, 20]));
 // → {value: 10, rest: {value: 20, rest: null}}
 console.log(listToArray(arrayToList([10, 20, 30])));
