@@ -41,6 +41,30 @@ function deepEqual (objA, objB) {
     }
 }
 
+// Book solution
+
+function deepEqual(objA, objB) {
+	if (objA === objB){
+      return true;
+    }
+  
+  	if ((objA === null && typeof objA != 'object') && (objB === null && typeof objB != 'object')) {
+    	return false;
+    } 
+  
+  	let keysA = Object.keys(objA); let keysB = Object.keys(objB);
+  	if(keysA.length != keysB.length) {
+    	return false;
+    }
+  
+  	for (let key of keysA) {
+    	if(!keysB.includes (key) || !deepEqual(objA[key], objB[key])) {
+          return false;
+        }
+    }
+  	
+  	return true; 
+}
 
 let obj = {here: {is: "an"}, object: 2};
 console.log(deepEqual(null, obj));
