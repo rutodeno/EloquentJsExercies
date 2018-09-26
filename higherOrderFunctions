@@ -1,0 +1,65 @@
+function randomNumber(min, max){
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+function randomCollection(start, end, number) {
+  	let randomAgeArray = [];
+	for (let i=0; i < number; i++) {
+    	randomAgeArray.push(randomNumber(start, end));
+    }
+  	return randomAgeArray;
+}
+
+let ageArray = randomCollection(0, 100, 10);
+function repeat(n, action) {
+	for (let i = 0; i < n; i++) {
+    	action(i);
+    }
+}
+
+let companyArray = [];
+let numbers = ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'];
+let categories = ['Finance', 'Retail', 'Auto', 'Technology','Finance', 'Retail', 'Auto', 'Technology', 'Auto', 'Technology']
+let startDates = randomCollection(1900, 1985, 10);
+let endDates = randomCollection(2000, 2018, 10);
+repeat(10, i => {
+	companyArray.push({name: `Company ${numbers[i]}`, category:`${categories[i]}`, startDate:`${startDates[i]}`, endDate: `${endDates[i]}`})
+})
+ageArray;
+companyArray;
+
+// get 21 and older
+const canDrink = ageArray.filter(age => age >= 21);
+// filter retail company
+const retailCompanies = companyArray.filter(company => company.category === 'Retail');
+// filter companies that started in the fifties
+const fiftiesCompanies = companyArray.filter(company => (company.startDate > 1949 && company.startDate < 1960));
+// filter companies that lasted for 20 years
+const lastedTwentyYears = companyArray.filter(company => (company.endDate - company.startDate) >= 30);
+
+//Map
+const companyDates = companyArray.map(company => `${company.name} [${company.startDate} - ${company.endDate}]`); 
+const ageSquare = ageArray;
+	.map (age => Math.pow(age, 2))
+	.map (age => age*2);
+console.log(ageSquare);
+
+//sort companies by start year 
+const sortCompanies = companyArray.sort((c1, c2) => (c1.startDate > c2.startDate ? 1 : -1));
+
+// sorting ages 
+
+const sortAges = ageArray.sort((a,b) => a - b);
+console.log(sortAges);
+// expected output: 5
+console.log(sortCompanies);
+
+// using reduce
+const ageSum = ageArray.reduce(function(total, age) {
+	return total += age;
+}, 0);
+
+const ageSumES6 = ageArray.reduce((total, age) => total + age, 0);
+const sumRange = companyArray.reduce((total, company) => total + (company.endDate - company.startDate), 0);
+console.log(sumRange);
